@@ -7,8 +7,14 @@ namespace unit_test
         public void TestGetAppColor()
         {
             // Arrange
+            string? a = "";
+
             // Act
+            // a = null;
+
             // Assert
+
+            Assert.IsNull(a);
         }
     }
 }
