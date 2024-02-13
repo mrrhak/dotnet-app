@@ -1,32 +1,28 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "App",
-            "type": "dotnet",
-            "request": "launch",
-            "projectPath": "${workspaceFolder}\\dotnet-app\\dotnet-app.csproj",
-        },
-        {
-            "name": "Dotnet App",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/dotnet-app/bin/Debug/net8.0/dotnet-app.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASPNETCORE_URLS": "https://localhost:5000"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        }
-    ]
+  "configurations": [
+    {
+      "name": "Dotnet App (SIT)",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/dotnet-app/dotnet-app.csproj",
+      // dotnet-app/Properties/launchSettings.json
+      "launchConfigurationId": "TargetFramework=;Dotnet App (SIT)"
+    },
+    {
+      "name": "Dotnet App (UAT)",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/dotnet-app/dotnet-app.csproj",
+      // dotnet-app/Properties/launchSettings.json
+      "launchConfigurationId": "TargetFramework=;Dotnet App (UAT)"
+    },
+    {
+      "name": "Dotnet App (PROD)",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/dotnet-app/dotnet-app.csproj",
+      // dotnet-app/Properties/launchSettings.json
+      "launchConfigurationId": "TargetFramework=;Dotnet App (PROD)"
+    }
+  ]
 }
