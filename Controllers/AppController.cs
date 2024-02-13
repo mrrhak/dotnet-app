@@ -11,7 +11,7 @@ namespace dotnet_app.Controllers
         [HttpGet]
         public IActionResult GetAppColor()
         {
-            string appColor = _configuration.GetValue<string>("AppSetting:AppColor") ?? "";
+            string? appColor = _configuration.GetValue<string>("AppSetting:AppColor");
             return Ok(new { appColor });
         }
     }
