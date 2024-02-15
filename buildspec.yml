@@ -1,0 +1,52 @@
+# This file for AWS CodeBuild by Kim Hak
+
+# Set the following env vars in CodeBuild (Environment Settings)
+# You will get most of them from the ECR URI: <ACCOUNT_ID>.dkr.ecr.<ECR_REGION>.amazonaws.com/<ECR_REPOSITORY_NAME>
+#
+# __ACCOUNT_ID__
+# __ECR_REGION__
+# __ECR_REPOSITORY_NAME__
+# __ECS_CONTAINER_NAME__
+#
+# The CodeBuild ServiceRole needs to have the following Permissions to upload to your (private) ECR
+#
+# "ecr:BatchCheckLayerAvailability",
+# "ecr:CompleteLayerUpload",
+# "ecr:GetAuthorizationToken",
+# "ecr:InitiateLayerUpload",
+# "ecr:PutImage",
+# "ecr:UploadLayerPart"
+
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 25.0
+  pre_build:
+    commands:
+      # Declare Variable
+      - ECR_REPOSITORY_BASE_URI=$__ACCOUNT_ID__.dkr.ecr.$__ECR_REGION__.amazonaws.com
+      - ECR_REPOSITORY_URI=$ECR_REPOSITORY_BASE_URI/$__ECR_REPOSITORY_NAME__
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      # Login To AWS ECR
+      - echo log in to Amazon ECR...
+      - aws --version
+      - aws ecr get-login-password --region $__ECR_REGION__ | docker login --username AWS --password-stdin $ECR_REPOSITORY_BASE_URI
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $ECR_REPOSITORY_URI:latest .
+      - docker tag $ECR_REPOSITORY_URI:latest $ECR_REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $ECR_REPOSITORY_URI:latest
+      - docker push $ECR_REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name”:"$__ECS_CONTAINER_NAME__","imageUri":"%s"}]' $ECR_REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
