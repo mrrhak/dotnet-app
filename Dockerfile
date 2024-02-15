@@ -28,7 +28,6 @@ RUN dotnet publish -c release --no-restore -o /app
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=publish /app ./
-# Expose ports
 EXPOSE 80
 EXPOSE 443
 ENTRYPOINT ["dotnet", "dotnet-app.dll"]
