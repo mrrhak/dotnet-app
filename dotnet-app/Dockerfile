@@ -7,7 +7,7 @@ RUN dotnet restore
 
 # copy everything else and build app
 COPY . .
-RUN dotnet publish -c release --no-restore -o /app
+RUN dotnet publish -c release -o /app
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
