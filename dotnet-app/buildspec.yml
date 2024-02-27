@@ -32,7 +32,6 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
       # Login To AWS ECR
       - echo log in to Amazon ECR...
-      - aws --version
       - aws ecr get-login-password --region $__ECR_REGION__ | docker login --username AWS --password-stdin $ECR_REPOSITORY_BASE_URI
   build:
     commands:
@@ -47,6 +46,6 @@ phases:
       - docker push $ECR_REPOSITORY_URI:latest
       - docker push $ECR_REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name”:"%s","imageUri":"%s"}]' $__ECS_CONTAINER_NAME__ $ECR_REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' $__ECS_CONTAINER_NAME__ $ECR_REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
