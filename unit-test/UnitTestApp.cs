@@ -10,7 +10,7 @@ namespace unit_test
             string? a = "";
 
             // Act
-            // a = null;
+            a = null;
 
             // Assert
 
