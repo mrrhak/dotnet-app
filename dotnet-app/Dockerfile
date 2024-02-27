@@ -11,6 +11,7 @@ RUN dotnet publish -c release -o /app
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
+RUN apt-get update && apt-get install -y --no-install-recommends curl;
 EXPOSE 8080
 WORKDIR /app
 COPY --from=build /app .
