@@ -10,10 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <SonarCloudSettings Include="sonar.exclusions">
-      <Value>**/*.html</Value>
-      <Value>**/Dockerfile</Value>
-    </SonarCloudSettings>
+    <SonarQubeSettings Include="sonar.exclusions">
+      <Value>**/*.html,**/Dockerfile</Value>
+    </SonarQubeSettings>
   </ItemGroup>
 
   <ItemGroup>
