@@ -1,2 +1,2 @@
-*.html linguage-detectable=false
-*.cshtml linguage-detectable=false
+**/*.html linguage-detectable=false
+**/*.css linguage-detectable=false
