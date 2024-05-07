@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <SonarCloudSettings Include="sonar.exclusions">
+      <Value>**/*.html</Value>
+      <Value>**/Dockerfile</Value>
+    </SonarCloudSettings>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
   </ItemGroup>
 
