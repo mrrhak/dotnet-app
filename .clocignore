@@ -1,0 +1,6 @@
+# cloc --exclude-list-file=.clocignore .
+
+dotnet-app/Views
+dotnet-app/bin
+dotnet-app/obj
+unit-test

@@ -1,2 +1,2 @@
-**/*.html linguage-detectable=false
-**/*.css linguage-detectable=false
+dotnet-app/Views/**/*.cshtml linguist-language=csharp
+dotnet-app/wwwroot/**/*.js linguist-vendored
